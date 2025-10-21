@@ -1,0 +1,194 @@
+/* Container */
+.container {
+  min-height: 100vh;
+  background-color: #f9fafb;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  padding: 5rem 1rem;
+  overflow: hidden;
+  background: linear-gradient(to right, #1f2937, #374151);
+  text-align: center;
+  color: #f9fafb;
+}
+
+.heroContent {
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.heroTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: inline-block;
+  /* Shimmer effect */
+  background: linear-gradient(90deg, #f9fafb 25%, #e5e7eb 50%, #f9fafb 75%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@media (min-width: 768px) {
+  .heroTitle {
+    font-size: 4rem;
+  }
+}
+@media (min-width: 1024px) {
+  .heroTitle {
+    font-size: 5rem;
+  }
+}
+
+.heroText {
+  font-size: 1.125rem;
+  max-width: 768px;
+  margin: 0 auto 2rem auto;
+  line-height: 1.75;
+  color: #d1d5db;
+}
+
+/* Subcategories */
+.subcategories {
+  padding: 5rem 1rem;
+  background-color: #ffffff;
+}
+
+.subcategoriesContent {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.subcategoriesHeader {
+  margin-bottom: 4rem;
+}
+
+.subcategoriesTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .subcategoriesTitle {
+    font-size: 2.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .subcategoriesTitle {
+    font-size: 3rem;
+  }
+}
+
+.subcategoriesText {
+  font-size: 1rem;
+  color: #6b7280;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.subcategoriesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .subcategoriesGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .subcategoriesGrid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* Category Card */
+.categoryCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 2px solid transparent;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.categoryCard:hover {
+  border-color: #d1d5db;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+}
+
+/* Silver glow effect */
+.categoryCard::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.2), rgba(255,255,255,0) 60%);
+  transform: rotate(45deg);
+  transition: all 0.5s ease;
+  opacity: 0;
+}
+
+.categoryCard:hover::after {
+  opacity: 1;
+  animation: glow 1.5s linear infinite;
+}
+
+@keyframes glow {
+  0% { transform: rotate(45deg) translateX(-100%); opacity: 0.5; }
+  50% { transform: rotate(45deg) translateX(100%); opacity: 0.7; }
+  100% { transform: rotate(45deg) translateX(-100%); opacity: 0.5; }
+}
+
+.categoryIcon {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-bottom: 1rem;
+  color: #374151;
+  transition: color 0.3s ease;
+}
+
+.categoryCard:hover .categoryIcon {
+  color: #111827;
+}
+
+.categoryLabel {
+  font-weight: 600;
+  color: #111827;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+.categoryCard:hover .categoryLabel {
+  color: #1f2937;
+}

@@ -1,0 +1,205 @@
+/* about.module.css */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', sans-serif;
+  color: #1f2937; /* Gray-900 */
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.heroBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(31, 41, 55, 0.7), rgba(31, 41, 55, 0.7)),
+              url("https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=1920&h=1080&fit=crop&crop=center") center/cover no-repeat;
+  z-index: 0;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 10;
+  color: #fbbf24; /* Amber-400 */
+}
+
+.heroTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.heroText {
+  font-size: 1.25rem;
+  max-width: 600px;
+  margin: 0 auto;
+  color: #f3f4f6; /* Gray-100 */
+}
+
+/* Story Section */
+.story {
+  padding: 6rem 1rem;
+  background-color: #f9fafb;
+}
+
+.storyInner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.storyHeader h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #111827; /* Gray-900 */
+}
+
+.storyDivider {
+  width: 60px;
+  height: 4px;
+  background-color: #fbbf24; /* Amber-400 */
+  margin-bottom: 2rem;
+}
+
+.storyGrid, .storyGridReverse {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+.storyGridReverse {
+  flex-direction: row-reverse;
+}
+
+.storyText {
+  flex: 1;
+  font-size: 1rem;
+  color: #4b5563; /* Gray-600 */
+}
+
+.storyImageWrapper {
+  flex: 1;
+}
+
+.storyImage {
+  width: 100%;
+  height: auto;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* Values Section */
+.values {
+  padding: 6rem 1rem;
+  background-color: #ffffff;
+}
+
+.valuesInner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.valuesHeader {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.valuesHeader h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.valuesHeader p {
+  color: #6b7280;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.valueCard {
+  background-color: #f3f4f6;
+  padding: 2rem;
+  border-radius: 1rem;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.valueCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.valueIconWrapper {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fbbf24;
+  border-radius: 50%;
+}
+
+.valueIcon {
+  width: 28px;
+  height: 28px;
+  color: white;
+}
+
+.valueTitle {
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.valueDesc {
+  font-size: 1rem;
+  color: #4b5563;
+}
+
+/* Trust Section */
+.trust {
+  padding: 6rem 1rem;
+  background-color: #f9fafb;
+  text-align: center;
+}
+
+.trustInner h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 1rem;
+}
+
+.trustInner p {
+  font-size: 1rem;
+  color: #4b5563;
+  max-width: 800px;
+  margin: 0.5rem auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .storyGrid, .storyGridReverse {
+    flex-direction: column;
+  }
+}

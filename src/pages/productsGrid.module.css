@@ -1,0 +1,38 @@
+.productsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;   /* center cards by default (mobile/tablet) */
+  gap: 16px;
+  padding: 16px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* small phones */
+@media (max-width: 480px) {
+  .productsContainer {
+    flex-direction: column;  /* stack vertically on tiny screens */
+    align-items: center;
+    gap: 14px;
+    padding: 12px;
+  }
+}
+
+/* tablets and small laptops */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .productsContainer {
+    justify-content: space-evenly;
+    gap: 18px;
+    padding: 18px;
+  }
+}
+
+/* desktop */
+@media (min-width: 1024px) {
+  .productsContainer {
+    justify-content: flex-start;
+    gap: 24px;
+    padding: 24px;
+  }
+}
+

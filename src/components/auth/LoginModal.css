@@ -1,0 +1,169 @@
+/* LoginModal.css */
+
+/* Modal Backdrop */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal Container */
+.modal-container {
+  background: #fff;
+  border-radius: 12px;
+  width: 400px;
+  max-width: 90%;
+  padding: 30px 25px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  position: relative;
+  font-family: "Inter", sans-serif;
+  color: #111827;
+}
+
+/* Close Button */
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #555;
+  transition: color 0.2s;
+}
+
+.modal-close:hover {
+  color: #000;
+}
+
+/* Tabs */
+.modal-tabs {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.modal-tabs button {
+  flex: 1;
+  padding: 8px 0;
+  background: #f5f5f5;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s;
+}
+
+.modal-tabs button.active {
+  background: #111827;
+  color: #fff;
+}
+
+/* Error Message */
+.modal-error {
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+/* Form */
+.modal-form label {
+  font-weight: 600;
+  font-size: 14px;
+  display: block;
+  margin-bottom: 5px;
+  margin-top: 15px;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 8px 12px;
+  gap: 8px;
+  background: #fafafa;
+}
+
+.input-group input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 14px;
+  background: transparent;
+  color: #111827;
+}
+
+.input-group button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #555;
+}
+
+/* Submit Buttons */
+.modal-form button[type="submit"] {
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px 0;
+  background: #111827;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.modal-form button[type="submit"]:hover {
+  background: #1f2937;
+}
+
+.modal-form button[type="submit"]:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* Google Button */
+.google-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px 0;
+  background: #4285f4;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s;
+}
+
+.google-btn:hover {
+  background: #357ae8;
+}
+
+/* Responsive */
+@media (max-width: 450px) {
+  .modal-container {
+    padding: 20px 15px;
+  }
+  .input-group input {
+    font-size: 13px;
+  }
+  .modal-tabs button {
+    font-size: 13px;
+  }
+}
+

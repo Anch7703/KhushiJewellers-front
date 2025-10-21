@@ -1,0 +1,121 @@
+/* productListing.module.css */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #555;
+}
+
+.arrowIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.skeleton {
+  background: #f3f3f3;
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  animation: pulse 1.5s infinite;
+}
+
+.skeletonImage {
+  width: 100%;
+  aspect-ratio: 1/1;
+  background: #e0e0e0;
+  border-radius: 8px;
+}
+
+.skeletonLine {
+  height: 12px;
+  width: 100%;
+  background: #e0e0e0;
+  border-radius: 6px;
+}
+
+.skeletonLineShort {
+  height: 12px;
+  width: 60%;
+  background: #e0e0e0;
+  border-radius: 6px;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+.empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #555;
+}
+
+.emptyTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.emptyText {
+  font-size: 1rem;
+}
+
+/* Wishlist button override inside ProductCard */
+.productCardButtonWrapper {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.whatsappButton {
+  background-color: #25D366;
+  color: white;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: transform 0.2s ease;
+}
+
+.whatsappButton:hover {
+  transform: scale(1.05);
+}

@@ -1,0 +1,90 @@
+.wrapper {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+p {
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Empty state */
+.emptyWrapper {
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f9fafb;
+}
+
+.emptyContent {
+  text-align: center;
+  max-width: 400px;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.emptyIcon {
+  margin-bottom: 1rem;
+}
+
+.emptyContent h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.emptyContent p {
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.linkButton {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.6rem 1.2rem;
+  background: #111;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.linkButtonOutline {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.6rem 1.2rem;
+  border: 2px solid #fbbf24;
+  color: #fbbf24;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.linkButtonOutline:hover {
+  background: #fbbf24;
+  color: #111;
+}

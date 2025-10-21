@@ -1,0 +1,117 @@
+/* gold.module.css */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.heroBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=1920&h=1080&fit=crop&crop=center') center/cover no-repeat;
+  filter: brightness(0.5);
+  z-index: -1;
+}
+
+.heroContent {
+  color: #fbbf24; /* gold highlight */
+  padding: 0 1rem;
+}
+
+.heroTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #fbbf24;
+}
+
+.heroText {
+  font-size: 1.125rem;
+  color: #fef3c7; /* soft gold text */
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Subcategories Section */
+.subcategories {
+  padding: 4rem 0;
+}
+
+.subcategoriesContent {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.subcategoriesHeader {
+  margin-bottom: 2rem;
+}
+
+.subcategoriesTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.subcategoriesText {
+  font-size: 1rem;
+  color: #6b7280;
+  margin-top: 0.5rem;
+}
+
+/* Subcategory Cards */
+.subcategoriesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.categoryCard {
+  background-color: #fef3c7; /* soft gold */
+  border-radius: 12px;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.categoryCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.categoryIcon {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: #b45309; /* darker gold accent */
+  margin-bottom: 0.5rem;
+}
+
+.categoryLabel {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #78350f;
+}
+.categoryCount {
+  font-size: 0.875rem;
+  color: #92400e;
+  margin-top: 0.25rem;
+}
