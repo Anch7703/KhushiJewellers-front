@@ -47,6 +47,7 @@ function App() {
       window.history.replaceState({}, document.title, "/");
       navigate("/"); // optional
     }
+    window.dispatchEvent(new Event("googleLoginComplete"));
   }, [navigate]);
 
   return (

@@ -3,9 +3,12 @@ import { Link } from "react-router-dom";
 import ProductCard from "../components/auth/common/ProductCard";
 import { Heart, Store, ShoppingBag } from "lucide-react";
 import styles from "./wishlist.module.css";
+import { motion, AnimatePresence } from "framer-motion";
+import ProductModal from "../components/auth/common/ProductModal";
 
 export default function Wishlist() {
   const [wishlist, setWishlist] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
     const savedWishlist = localStorage.getItem("khushijewellers_wishlist");
@@ -16,6 +19,18 @@ export default function Wishlist() {
     const updatedWishlist = wishlist.filter((p) => p._id !== productId);
     setWishlist(updatedWishlist);
     localStorage.setItem("khushijewellers_wishlist", JSON.stringify(updatedWishlist));
+  };
+
+  const toggleWishlist = (product) => {
+    const exists = wishlist.some((item) => item._id === product._id);
+    let updated;
+    if (exists) {
+      updated = wishlist.filter((item) => item._id !== product._id);
+    } else {
+      updated = [...wishlist, product];
+    }
+    setWishlist(updated);
+    localStorage.setItem("khushijewellers_wishlist", JSON.stringify(updated));
   };
 
   const getWhatsAppLink = (product) => {
@@ -48,20 +63,36 @@ export default function Wishlist() {
   return (
     <div className={styles.wrapper}>
       <h1>My Wishlist</h1>
-      <p>{wishlist.length} item{wishlist.length !== 1 ? "s" : ""} saved</p>
+      <p>
+        {wishlist.length} item{wishlist.length !== 1 ? "s" : ""} saved
+      </p>
 
       <div className={styles.grid}>
         {wishlist.map((product) => (
-          <ProductCard
+          <div
             key={product._id}
-            product={product}
-            isWishlisted={true}
-            onToggleWishlist={() => removeFromWishlist(product._id)}
-            onWhatsApp={() => window.open(getWhatsAppLink(product), "_blank")}
-          />
+            onClick={() => setSelectedProduct(product)} // ✅ open modal on click
+            style={{ cursor: "pointer" }}
+          >
+            <ProductCard
+              product={product}
+              onToggleWishlist={() => toggleWishlist(product)}
+              isWishlisted={true}
+            />
+          </div>
         ))}
+
+        {/* ✅ Product Modal (shared with Featured/Listing) */}
+        <AnimatePresence mode="wait">
+          {selectedProduct && (
+            <ProductModal
+              key={selectedProduct._id}
+              product={selectedProduct}
+              onClose={() => setSelectedProduct(null)}
+            />
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
 }
-

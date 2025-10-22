@@ -17,16 +17,25 @@ const Navbar = () => {
       setUser(null);
     }
   };
+useEffect(() => {
+  // Run once on mount
+  loadUserFromStorage();
 
-  useEffect(() => {
-    loadUserFromStorage();
+  // Sync login state across tabs and OAuth redirects
+  const handleStorageChange = () => loadUserFromStorage();
 
-    // Sync login state across tabs
-    const handleStorageChange = () => loadUserFromStorage();
-    window.addEventListener("storage", handleStorageChange);
+  // ✅ Listen for Google login completion
+  const handleGoogleLogin = () => loadUserFromStorage();
 
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+  window.addEventListener("storage", handleStorageChange);
+  window.addEventListener("googleLoginComplete", handleGoogleLogin);
+
+  return () => {
+    window.removeEventListener("storage", handleStorageChange);
+    window.removeEventListener("googleLoginComplete", handleGoogleLogin);
+  };
+}, []);
+
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
