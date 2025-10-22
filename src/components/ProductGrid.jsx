@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import ProductCard from "./ProductCard";
 import ProductModal from "./ProductModal";
-
+import "./ProductGrid.css";
 const ProductGrid = ({ products }) => {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
