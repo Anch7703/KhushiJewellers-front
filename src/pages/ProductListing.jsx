@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
-import ProductCard from "../../../front/src/components/auth/common/ProductCard";
+import ProductCard from "../components/auth/common/ProductCard";
 import { motion, AnimatePresence } from "framer-motion"; // 👈 import AnimatePresence here
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import styles from "./productListing.module.css";
 import useWishlist from "../hooks/usewishlist";
-import ImportedProductModal from "../../../front/src/components/auth/common/ProductModal";
+import ImportedProductModal from "../components/auth/common/ProductModal";
 
 const ProductModal = (props) => <ImportedProductModal {...props} />;
 
