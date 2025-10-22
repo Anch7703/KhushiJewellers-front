@@ -31,7 +31,10 @@ export default function ProductListing() {
       if (subcategory && subcategory !== "all") {
         url += `&subcategory=${subcategory}`;
       }
-      const response = await fetch(url);
+      const response = await fetch(
+       `${import.meta.env.VITE_API_URL}${url}`,
+        { credentials: "include" }
+       );
       if (!response.ok) throw new Error("Failed to fetch products");
       const data = await response.json();
       setProducts(data);

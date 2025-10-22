@@ -26,8 +26,11 @@ export default function Home() {
   const loadFeaturedProducts = async () => {
     try {
       // use relative path so it works with same origin in production
-      const response = await fetch("/api/products?featured=true&limit=10");
-      const products = await response.json();
+      const response = await fetch(
+     `${import.meta.env.VITE_API_URL}/api/products?featured=true&limit=10`
+     );
+     const products = await response.json();
+
       // Ensure we only keep products that are actually featured.
       const items = Array.isArray(products) ? products : products ? [products] : [];
       const filtered = items.filter(
