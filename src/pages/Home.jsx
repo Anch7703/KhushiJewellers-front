@@ -7,6 +7,9 @@ import styles from "./Home.module.css";
 import ProductCard from "../components/auth/common/ProductCard";
 import ProductModal from "../components/auth/common/ProductModal";
 
+// ✅ Automatically works for both localhost and Render
+const API_BASE = import.meta.env.VITE_API_URL || "";
+
 export default function Home() {
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,8 +18,6 @@ export default function Home() {
     return savedWishlist ? JSON.parse(savedWishlist) : [];
   });
   const [showLoginModal, setShowLoginModal] = useState(false);
-
-  // NEW: modal control for featured items
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
@@ -25,20 +26,17 @@ export default function Home() {
 
   const loadFeaturedProducts = async () => {
     try {
-      // use relative path so it works with same origin in production
-      const response = await fetch(
-     `${import.meta.env.VITE_API_URL}/api/products?featured=true&limit=10`
-     );
-     const products = await response.json();
+      const response = await fetch(`${API_BASE}/api/products?featured=true&limit=10`);
+      if (!response.ok) throw new Error("Failed to fetch featured products");
+      const products = await response.json();
 
-      // Ensure we only keep products that are actually featured.
       const items = Array.isArray(products) ? products : products ? [products] : [];
       const filtered = items.filter(
         (p) => p && (p.featured === true || p.featured === "true")
       );
       setFeaturedProducts(filtered);
     } catch (error) {
-      console.error("Error loading featured products:", error);
+      console.error("❌ Error loading featured products:", error);
     } finally {
       setLoading(false);
     }
@@ -60,13 +58,14 @@ export default function Home() {
 
   const getWhatsAppLink = (product) => {
     const phoneNumber = import.meta.env.VITE_WHATSAPP_NUMBER || "919844101760";
-    // ensure an absolute URL (WhatsApp needs a publicly accessible URL to render preview)
     const imageUrl =
       product.imageUrl && (product.imageUrl.startsWith("http") || product.imageUrl.startsWith("https"))
         ? product.imageUrl
         : `${window.location.origin}/images/products/${product.imageUrl || ""}`;
 
-    const message = `Hi! I'm interested in *${product.name}*${product.weight ? ` (Weight: ${product.weight}g)` : ""}.\n\n🖼️ Product image:\n${imageUrl}\n\nCould you share more details or pricing?`;
+    const message = `Hi! I'm interested in *${product.name}*${
+      product.weight ? ` (Weight: ${product.weight}g)` : ""
+    }.\n\n🖼️ Product image:\n${imageUrl}\n\nCould you share more details or pricing?`;
     return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
   };
 
@@ -201,7 +200,7 @@ export default function Home() {
                 <div
                   key={product._id}
                   className={styles.productCard}
-                  onClick={() => setSelectedProduct(product)} // open modal
+                  onClick={() => setSelectedProduct(product)}
                   style={{ cursor: "pointer" }}
                 >
                   <img
@@ -210,22 +209,18 @@ export default function Home() {
                     className={styles.productImage}
                     onError={(e) => {
                       if (!e.target.dataset.failed) {
-                        console.error(`Image failed to load: ${product.imageUrl}`);
                         e.target.src = "/images/products/default.jpg";
-                        e.target.style.border = "2px solid red";
                         e.target.dataset.failed = true;
                       }
                     }}
                   />
-
                   <h3 className={styles.productName}>{product.name}</h3>
-
                   <a
                     href={getWhatsAppLink(product)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={styles.whatsappButton}
-                    onClick={(e) => e.stopPropagation()} // prevent modal open when clicking whatsapp
+                    onClick={(e) => e.stopPropagation()}
                   >
                     Contact via WhatsApp
                   </a>
@@ -236,7 +231,7 @@ export default function Home() {
         </section>
       )}
 
-      {/* Render modal controlled by this Home component */}
+      {/* Product Modal */}
       <AnimatePresence mode="wait">
         {selectedProduct ? (
           <ProductModal
@@ -247,7 +242,7 @@ export default function Home() {
         ) : null}
       </AnimatePresence>
 
-      {/* LOGIN MODAL */}
+      {/* Login Modal */}
       {showLoginModal && <LoginModal onClose={() => setShowLoginModal(false)} />}
     </div>
   );

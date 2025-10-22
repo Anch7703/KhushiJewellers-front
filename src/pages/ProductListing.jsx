@@ -1,15 +1,17 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import ProductCard from "../components/auth/common/ProductCard";
-import { motion, AnimatePresence } from "framer-motion"; // 👈 import AnimatePresence here
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import styles from "./productListing.module.css";
 import useWishlist from "../hooks/usewishlist";
 import ImportedProductModal from "../components/auth/common/ProductModal";
 
-const ProductModal = (props) => <ImportedProductModal {...props} />;
+// ✅ Use this to handle both localhost + Render automatically
+const API_BASE = import.meta.env.VITE_API_URL || "";
 
+const ProductModal = (props) => <ImportedProductModal {...props} />;
 
 export default function ProductListing() {
   const { wishlist, toggleWishlist } = useWishlist();
@@ -26,22 +28,24 @@ export default function ProductListing() {
   const loadProducts = useCallback(async () => {
     setLoading(true);
     setError(false);
+
     try {
       let url = `/api/products?category=${category}`;
       if (subcategory && subcategory !== "all") {
         url += `&subcategory=${subcategory}`;
       }
-      console.log("Fetching from:", `${import.meta.env.VITE_API_URL}${url}`);
 
-      const response = await fetch(
-       `${import.meta.env.VITE_API_URL}${url}`,
-        { credentials: "include" }
-       );
+      const fullUrl = `${API_BASE}${url}`;
+      console.log("📦 Fetching products from:", fullUrl);
+
+      const response = await fetch(fullUrl, { credentials: "include" });
+
       if (!response.ok) throw new Error("Failed to fetch products");
       const data = await response.json();
+
       setProducts(data);
     } catch (error) {
-      console.error("Error loading products:", error);
+      console.error("❌ Error loading products:", error);
       setError(true);
     } finally {
       setLoading(false);
@@ -53,22 +57,20 @@ export default function ProductListing() {
   }, [loadProducts]);
 
   const getWhatsAppLink = (product) => {
-   
-  const message = encodeURIComponent(
-  `Hi! I'm interested in ${product.name} (Product ID: ${product._id}${
-    product.weight ? `, Weight: ${product.weight}g` : ""
-  }). Could you share more details?`
-);
- return `https://wa.me/917XXXXXXXXX?text=${encodeURIComponent(message)}`;
+    const message = encodeURIComponent(
+      `Hi! I'm interested in ${product.name} (Product ID: ${product._id}${
+        product.weight ? `, Weight: ${product.weight}g` : ""
+      }). Could you share more details?`
+    );
+    return `https://wa.me/917XXXXXXXXX?text=${message}`;
   };
 
   const formatTitle = (text) =>
     text ? text.charAt(0).toUpperCase() + text.slice(1).toLowerCase() : "";
 
-  const pageTitle =
-    `${subcategory === "all" ? "" : formatTitle(subcategory) + " "} ${formatTitle(
-      category
-    )} Collection`.trim();
+  const pageTitle = `${subcategory === "all" ? "" : formatTitle(subcategory) + " "} ${formatTitle(
+    category
+  )} Collection`.trim();
 
   const backLink = `/${formatTitle(category)}`;
 
@@ -107,9 +109,7 @@ export default function ProductListing() {
               ))}
           </div>
         ) : error ? (
-          <div className={styles.error}>
-            Error loading products. Please try again later.
-          </div>
+          <div className={styles.error}>Error loading products. Please try again later.</div>
         ) : products.length > 0 ? (
           <motion.div
             className={styles.grid}
@@ -121,20 +121,16 @@ export default function ProductListing() {
               <div key={product._id} className={styles.productWrapper}>
                 <div
                   className={styles.imageClickArea}
-                  onClick={() => setSelectedProduct(product)} // 👈 open modal
+                  onClick={() => setSelectedProduct(product)}
                 >
                   <ProductCard
                     product={product}
-                    isWishlisted={wishlist.some(
-                      (item) => item._id === product._id
-                    )}
+                    isWishlisted={wishlist.some((item) => item._id === product._id)}
                     onToggleWishlist={() => toggleWishlist(product)}
                     onWhatsApp={() =>
                       window.open(getWhatsAppLink(product), "_blank")
-                  
                     }
                   />
-                 
                 </div>
               </div>
             ))}
@@ -142,22 +138,20 @@ export default function ProductListing() {
         ) : (
           <div className={styles.empty}>
             <h3 className={styles.emptyTitle}>No products found</h3>
-            <p>
-              We're currently updating this collection. Please check back soon!
-            </p>
+            <p>We're currently updating this collection. Please check back soon!</p>
           </div>
         )}
 
-        {/* 🪄 Modal with AnimatePresence (fixes double-render + blur) */}
+        {/* Modal */}
         <AnimatePresence mode="wait">
-  {selectedProduct ? (
-    <ProductModal
-      key={selectedProduct._id}
-      product={selectedProduct}
-      onClose={() => setSelectedProduct(null)}
-    />
-  ) : null}
-</AnimatePresence>
+          {selectedProduct ? (
+            <ProductModal
+              key={selectedProduct._id}
+              product={selectedProduct}
+              onClose={() => setSelectedProduct(null)}
+            />
+          ) : null}
+        </AnimatePresence>
       </div>
     </div>
   );

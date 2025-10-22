@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Heart, HeartOff } from "lucide-react";
 import styles from "./productCard.module.css";
@@ -7,16 +7,29 @@ export default function ProductCard({
   product,
   onToggleWishlist,
   isWishlisted,
-  onClick,       // called when the card is clicked (open modal in parent)
-  onWhatsApp,    // optional handler for WhatsApp button
+  onClick, // triggers modal
+  onWhatsApp, // triggers WhatsApp
 }) {
   const [wishlisted, setWishlisted] = useState(isWishlisted);
 
+  // keep in sync with parent (if wishlist updates externally)
+  useEffect(() => {
+    setWishlisted(isWishlisted);
+  }, [isWishlisted]);
+
   const handleToggleWishlist = (e) => {
     e.preventDefault();
-    e.stopPropagation(); // prevent the card click from firing
-    setWishlisted((v) => !v); // optimistic UI update
+    e.stopPropagation(); // prevents opening modal
+    setWishlisted((prev) => !prev);
     if (onToggleWishlist) onToggleWishlist(product);
+  };
+
+  const handleImageError = (e) => {
+    if (!e.target.dataset.failed) {
+      console.warn(`❌ Image failed to load: ${product.imageUrl}`);
+      e.target.src = "/images/products/default.jpg";
+      e.target.dataset.failed = true;
+    }
   };
 
   return (
@@ -26,21 +39,25 @@ export default function ProductCard({
       viewport={{ once: true, amount: 0.3 }}
       whileHover={{ y: -8 }}
       transition={{ duration: 0.3 }}
-      onClick={() => onClick && onClick(product)} // parent handles modal open
+      onClick={() => onClick?.(product)}
       style={{ cursor: onClick ? "pointer" : "default" }}
     >
       <div className={styles.card}>
+        {/* Product Image */}
         <div className={styles.imageWrapper}>
           <img
-            src={product.imageUrl || "https://via.placeholder.com/400"}
-            alt={product.name}
+            src={product.imageUrl || "/images/products/default.jpg"}
+            alt={product.name || "Product"}
             className={styles.productImage}
+            onError={handleImageError}
           />
 
+          {/* Wishlist Icon */}
           <div className={styles.badgesTopRight}>
             <button
               className={styles.wishlistButton}
-              onClick={(e) => handleToggleWishlist(e)}
+              onClick={handleToggleWishlist}
+              aria-label="Toggle wishlist"
             >
               {wishlisted ? (
                 <Heart color="red" className={styles.heartIcon} />
@@ -51,15 +68,16 @@ export default function ProductCard({
           </div>
         </div>
 
+        {/* Product Info */}
         <div className={styles.cardContent}>
           <h3 className={styles.productName}>{product.name}</h3>
           {product.category && (
             <p className={styles.productCategory}>{product.category}</p>
           )}
 
-          {/* optional small actions row (WhatsApp) — keeps from triggering card click */}
-          <div className={styles.cardActions}>
-            {onWhatsApp && (
+          {/* WhatsApp Button */}
+          {onWhatsApp && (
+            <div className={styles.cardActions}>
               <button
                 className={styles.whatsappButton}
                 onClick={(e) => {
@@ -67,10 +85,10 @@ export default function ProductCard({
                   onWhatsApp(product);
                 }}
               >
-                WhatsApp
+                💬 WhatsApp
               </button>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </motion.div>
