@@ -31,6 +31,8 @@ export default function ProductListing() {
       if (subcategory && subcategory !== "all") {
         url += `&subcategory=${subcategory}`;
       }
+      console.log("Fetching from:", `${import.meta.env.VITE_API_URL}${url}`);
+
       const response = await fetch(
        `${import.meta.env.VITE_API_URL}${url}`,
         { credentials: "include" }
