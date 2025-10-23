@@ -100,8 +100,8 @@ const ProductModal = ({ product, onClose = () => {} }) => {
           {/* Product Info */}
           <h2 className="modal-title">{product.name}</h2>
 
-          {product.weight && (
-            <p className="modal-weight">Weight: {product.weight}g</p>
+          {product.Weight && (
+            <p className="modal-weight">Weight: {product.Weight}g</p>
           )}
 
           <p className="modal-desc">

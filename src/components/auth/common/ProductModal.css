@@ -138,3 +138,19 @@
   from { transform: scale(0.9); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
+.modal-details {
+  margin: 8px 0;
+  text-align: center;
+  font-size: 1rem;
+  color: #555;
+}
+
+.modal-weight strong,
+.modal-category strong {
+  color: #b8860b; /* soft gold */
+}
+
+.modal-weight.missing {
+  color: #999;
+  font-style: italic;
+}
