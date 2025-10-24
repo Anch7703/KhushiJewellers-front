@@ -47,7 +47,7 @@ export default function ProductCard({
         {/* Product Image */}
         <div className={styles.imageWrapper}>
           <img
-            src={product.imageUrl || "/images/products/default.jpg"}
+            src={product.imageUrl}
             alt={product.name || "Product"}
             className={styles.productImage}
             onError={handleImageError}
