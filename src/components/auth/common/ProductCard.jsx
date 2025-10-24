@@ -27,7 +27,8 @@ export default function ProductCard({
   const handleImageError = (e) => {
     if (!e.target.dataset.failed) {
       console.warn(`❌ Image failed to load: ${product.imageUrl}`);
-      e.target.src = "/images/products/default.jpg";
+    e.target.src = "https://khushijewllers.onrender.com/images/products/default.jpg";
+
       e.target.dataset.failed = true;
     }
   };
