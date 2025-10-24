@@ -1,38 +1,47 @@
 .productsContainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;   /* center cards by default (mobile/tablet) */
-  gap: 16px;
-  padding: 16px;
-  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* flexible grid */
+  gap: 20px;
+  padding: 20px;
+  justify-items: center;
   box-sizing: border-box;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto; /* center entire grid */
 }
 
-/* small phones */
+/* 💡 Small phones */
 @media (max-width: 480px) {
   .productsContainer {
-    flex-direction: column;  /* stack vertically on tiny screens */
-    align-items: center;
-    gap: 14px;
-    padding: 12px;
+    grid-template-columns: 1fr;  /* single column */
+    gap: 22px;
+    padding: 16px 24px;  /* add side padding */
   }
 }
 
-/* tablets and small laptops */
-@media (min-width: 640px) and (max-width: 1023px) {
+/* 💡 Tablets */
+@media (min-width: 481px) and (max-width: 768px) {
   .productsContainer {
-    justify-content: space-evenly;
-    gap: 18px;
-    padding: 18px;
+    grid-template-columns: repeat(2, 1fr); /* two per row */
+    gap: 24px;
+    padding: 18px 32px;
   }
 }
 
-/* desktop */
+/* 💡 Small laptops */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .productsContainer {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    padding: 20px 36px;
+  }
+}
+
+/* 💡 Desktops */
 @media (min-width: 1024px) {
   .productsContainer {
-    justify-content: flex-start;
-    gap: 24px;
-    padding: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+    padding: 24px 40px;
   }
 }
-
