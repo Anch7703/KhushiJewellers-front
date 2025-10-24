@@ -20,7 +20,7 @@ const subcategories = [
   { key: "bracelets", label: "Bracelets", icon: Hand },
   { key: "earrings", label: "Earrings", icon: Ear },
   { key: "anklets", label: "Anklets", icon: Footprints },
-  { key: "pooja-silverware", label: "Pooja Silverware", icon: Sparkles },
+  { key: "pooja silverware", label: "Pooja Silverware", icon: Sparkles },
 ];
 
 export default function Silver() {
