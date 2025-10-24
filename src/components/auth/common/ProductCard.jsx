@@ -8,18 +8,16 @@ export default function ProductCard({
   onToggleWishlist,
   isWishlisted,
   onClick, // triggers modal
-  onWhatsApp, // triggers WhatsApp
 }) {
   const [wishlisted, setWishlisted] = useState(isWishlisted);
 
-  // keep in sync with parent (if wishlist updates externally)
   useEffect(() => {
     setWishlisted(isWishlisted);
   }, [isWishlisted]);
 
   const handleToggleWishlist = (e) => {
     e.preventDefault();
-    e.stopPropagation(); // prevents opening modal
+    e.stopPropagation();
     setWishlisted((prev) => !prev);
     if (onToggleWishlist) onToggleWishlist(product);
   };
@@ -27,10 +25,26 @@ export default function ProductCard({
   const handleImageError = (e) => {
     if (!e.target.dataset.failed) {
       console.warn(`❌ Image failed to load: ${product.imageUrl}`);
-    e.target.src = "https://khushijewllers.onrender.com/images/products/default.jpg";
-
+      e.target.src = "https://khushijewllers.onrender.com/images/products/default.jpg";
       e.target.dataset.failed = true;
     }
+  };
+
+  // ✅ Generate WhatsApp link directly here
+  const getWhatsAppLink = (product) => {
+    const phoneNumber = import.meta.env.VITE_WHATSAPP_NUMBER || "919844101760";
+
+    const imageUrl =
+      product.imageUrl &&
+      (product.imageUrl.startsWith("http") || product.imageUrl.startsWith("https"))
+        ? product.imageUrl
+        : `${window.location.origin}/images/products/${product.imageUrl || ""}`;
+
+    const message = `Hi! I'm interested in *${product.name}*${
+      product.weight ? ` (Weight: ${product.weight}g)` : ""
+    }.\n\n🖼️ Product image:\n${imageUrl}\n\nCould you share more details or pricing?`;
+
+    return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
   };
 
   return (
@@ -76,20 +90,16 @@ export default function ProductCard({
             <p className={styles.productCategory}>{product.category}</p>
           )}
 
-          {/* WhatsApp Button */}
-          {onWhatsApp && (
-            <div className={styles.cardActions}>
-              <button
-                className={styles.whatsappButton}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onWhatsApp(product);
-                }}
-              >
-                💬 WhatsApp
-              </button>
-            </div>
-          )}
+          {/* ✅ WhatsApp Button */}
+          <a
+            href={getWhatsAppLink(product)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.whatsappButton}
+            onClick={(e) => e.stopPropagation()} // prevents modal trigger
+          >
+            💬 Contact via WhatsApp
+          </a>
         </div>
       </div>
     </motion.div>
