@@ -9,8 +9,8 @@ const Footer = () => {
         {/* Contact Us */}
         <div className="footer-section">
           <h3>Contact Us</h3>
-          <p>Email: <a href="mailto:khushijewellers@example.com">khushijewellers@example.com</a></p>
-          <p>Phone: <a href="tel:+919876543210">+91 98441 01760</a></p>
+          <p>Email: <a href="mailto:khushijewellerywork@gmail.com">khushijewellerywork@gmail.com</a></p>
+          <p>Phone: <a href="tel:+919844101760">+91 98441 01760</a></p>
         </div>
 
         {/* Visit Our Store */}
