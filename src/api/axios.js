@@ -1,10 +1,9 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL
-    ? `${import.meta.env.VITE_API_URL}/api`
-    : "https://khushijewllers.onrender.com/api",
-  withCredentials: true, // ✅ ensures session cookies are sent
+  baseURL: "https://khushijewllers.onrender.com/api",  // ✅ backend URL
+  withCredentials: true
 });
+
 
 export default instance;

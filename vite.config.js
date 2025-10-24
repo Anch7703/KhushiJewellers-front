@@ -17,7 +17,7 @@ export default defineConfig({
     proxy: {
       // forward all API requests to backend
       '/api': {
-        target: 'http://localhost:5000', // your Express server port
+        target: 'https://khushijewllers.onrender.com',
         changeOrigin: true,
         secure: false,
       },
